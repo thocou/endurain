@@ -23,3 +23,4 @@ mcp_server = FastMCP(
 
 # Tool/resource/prompt imports — registers decorators
 import mcp_module.tools.activities  # noqa: F401
+import mcp_module.tools.health  # noqa: F401

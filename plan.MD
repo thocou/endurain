@@ -778,7 +778,7 @@ cd backend && poetry run pytest tests/mcp_module/tools/test_activities.py -v
 
 ---
 
-### Step 8: MCP Tools — Health
+### Step 8: MCP Tools — Health ✅ DONE
 
 **Goal:** Health data tools (sleep, weight, steps).
 
