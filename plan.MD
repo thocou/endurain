@@ -993,7 +993,7 @@ cd backend && poetry run pytest tests/mcp_module/tools/test_profile.py -v
 
 ---
 
-### Step 11: MCP Resources
+### Step 11: MCP Resources ✅ DONE
 
 **Goal:** Static/dynamic resources that LLMs can load into context.
 

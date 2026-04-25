@@ -26,3 +26,4 @@ import mcp_module.tools.activities  # noqa: F401
 import mcp_module.tools.health  # noqa: F401
 import mcp_module.tools.gear  # noqa: F401
 import mcp_module.tools.profile  # noqa: F401
+import mcp_module.resources  # noqa: F401
