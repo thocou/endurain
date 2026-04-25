@@ -74,7 +74,7 @@ Step 4 can be done in parallel with Steps 5–6 (frontend vs. backend).
 
 ## Phase 1 — API Key Infrastructure
 
-### Step 1: Database Model + Alembic Migration
+### Step 1: Database Model + Alembic Migration ✅ DONE
 
 **Goal:** Create the `user_api_keys` table.
 
@@ -121,7 +121,7 @@ cd backend/app && uvicorn main:app --reload
 
 ---
 
-### Step 2: API Keys Backend Module (CRUD + Schema + Router)
+### Step 2: API Keys Backend Module (CRUD + Schema + Router) ✅ DONE
 
 **Goal:** Full CRUD API for managing API keys at `/api/v1/api_keys`.
 

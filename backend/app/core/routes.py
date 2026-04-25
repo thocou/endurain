@@ -1,6 +1,7 @@
 from fastapi import APIRouter, Depends, Security
 
 # Alphabetized router imports
+import api_keys.router as api_keys_router
 import activities.activity.router as activities_router
 import activities.activity.public_router as activities_public_router
 import activities.activity_exercise_titles.router as activity_exercise_titles_router
@@ -49,6 +50,14 @@ import websocket.router as websocket_router
 router = APIRouter()
 
 # Router files (alphabetical order)
+router.include_router(
+    api_keys_router.router,
+    prefix=core_config.ROOT_PATH + "/api_keys",
+    tags=["api_keys"],
+    dependencies=[
+        Depends(auth_security.validate_access_token)
+    ],
+)
 router.include_router(
     activities_router.router,
     prefix=core_config.ROOT_PATH + "/activities",
