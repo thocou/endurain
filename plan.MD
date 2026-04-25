@@ -413,7 +413,7 @@ cd backend/app && uvicorn main:app --reload
 
 ## Phase 2 — MCP Server
 
-### Step 5: Add MCP Dependency
+### Step 5: Add MCP Dependency ✅ DONE
 
 **Goal:** Add the `mcp` Python package to the project.
 
