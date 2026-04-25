@@ -1063,7 +1063,7 @@ cd backend && poetry run pytest tests/mcp_module/test_resources.py -v
 
 ---
 
-### Step 12: MCP Prompts
+### Step 12: MCP Prompts ✅ DONE
 
 **Goal:** Reusable prompt templates for AI assistants.
 
