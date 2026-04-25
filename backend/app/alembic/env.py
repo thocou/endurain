@@ -6,6 +6,7 @@ from sqlalchemy import pool
 from alembic import context
 
 
+import api_keys.models
 import auth.identity_providers.models
 import auth.mfa_backup_codes.models
 import auth.oauth_state.models

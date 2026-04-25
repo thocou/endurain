@@ -62,6 +62,7 @@ class Users(Base):
             linked to the user.
         oauth_states: List of OAuth states for the user.
         mfa_backup_codes: List of MFA backup codes.
+        api_keys: List of API keys for MCP access.
     """
 
     __tablename__ = "users"
@@ -283,6 +284,11 @@ class Users(Base):
     )
     mfa_backup_codes = relationship(
         "MFABackupCode",
+        back_populates="users",
+        cascade="all, delete-orphan",
+    )
+    api_keys = relationship(
+        "UserApiKey",
         back_populates="users",
         cascade="all, delete-orphan",
     )
