@@ -931,7 +931,7 @@ cd backend && poetry run pytest tests/mcp_module/tools/test_gear.py -v
 
 ---
 
-### Step 10: MCP Tools — Profile
+### Step 10: MCP Tools — Profile ✅ DONE
 
 **Goal:** Read-only profile tools.
 
