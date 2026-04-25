@@ -449,7 +449,7 @@ cd ../../frontend/app && npm run build
 
 ---
 
-### Step 6: MCP Module Skeleton + Auth + FastAPI Mount
+### Step 6: MCP Module Skeleton + Auth + FastAPI Mount ✅ DONE
 
 **Goal:** Create the MCP server instance with authentication, mount it into FastAPI, and verify it responds to MCP protocol requests.
 
@@ -1187,7 +1187,7 @@ npm run format                     # passes
 
 ## Phase 4 — Documentation
 
-### Step 14: MCP Integration Docs
+### Step 14: MCP Integration Docs ✅ DONE
 
 **Goal:** Document how users connect MCP clients to Endurain.
 
