@@ -7,5 +7,6 @@
   "myGoals": "Moji cilji",
   "securitySection": "Varnost",
   "integrationsSection": "Integracije",
-  "importSection": "Uvoz"
+  "importSection": "Uvoz",
+  "apiKeysSection": "API Keys"
 }

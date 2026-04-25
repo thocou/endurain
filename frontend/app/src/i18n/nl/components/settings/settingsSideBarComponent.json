@@ -7,5 +7,6 @@
   "myGoals": "My Goals",
   "securitySection": "Beveiliging",
   "integrationsSection": "Integraties",
-  "importSection": "Importeren"
+  "importSection": "Importeren",
+  "apiKeysSection": "API Keys"
 }

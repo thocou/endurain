@@ -7,5 +7,6 @@
   "myGoals": "Mina mål",
   "securitySection": "Säkerhet",
   "integrationsSection": "Integrationer",
-  "importSection": "Importera"
+  "importSection": "Importera",
+  "apiKeysSection": "API Keys"
 }

@@ -7,5 +7,6 @@
   "myGoals": "我的目标",
   "securitySection": "安全设置",
   "integrationsSection": "服务集成",
-  "importSection": "数据导入"
+  "importSection": "数据导入",
+  "apiKeysSection": "API Keys"
 }

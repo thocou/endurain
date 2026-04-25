@@ -38,6 +38,9 @@
 
     <!-- Include the SettingsImportZone -->
     <SettingsImportZone v-if="activeSection === 'import'" />
+
+    <!-- Include the SettingsApiKeysZone -->
+    <SettingsApiKeysZone v-if="activeSection === 'apiKeys'" />
   </div>
   <!-- back button -->
   <BackButtonComponent />
@@ -65,6 +68,7 @@ import SettingsIntegrationsZone from '../components/Settings/SettingsIntegration
 import BackButtonComponent from '@/components/GeneralComponents/BackButtonComponent.vue'
 import SettingsImportZone from '../components/Settings/SettingsImportZone.vue'
 import SettingsUserGoals from '../components/Settings/SettingsUserGoals.vue'
+import SettingsApiKeysZone from '../components/Settings/SettingsApiKeysZone.vue'
 
 const authStore = useAuthStore()
 const route = useRoute()

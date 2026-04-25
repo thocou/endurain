@@ -107,6 +107,17 @@
           <span class="ms-1">{{ $t('settingsSideBar.importSection') }}</span>
         </a>
       </li>
+      <li class="nav-item">
+        <a
+          href="#"
+          class="nav-link link-body-emphasis"
+          :class="{ active: activeSection === 'apiKeys' }"
+          @click.prevent="changeActive('apiKeys')"
+        >
+          <font-awesome-icon :icon="['fas', 'key']" />
+          <span class="ms-1">{{ $t('settingsSideBar.apiKeysSection') }}</span>
+        </a>
+      </li>
     </ul>
   </div>
 </template>

@@ -7,5 +7,6 @@
   "myGoals": "Objectius",
   "securitySection": "Seguretat",
   "integrationsSection": "Integracions",
-  "importSection": "Importa"
+  "importSection": "Importa",
+  "apiKeysSection": "API Keys"
 }

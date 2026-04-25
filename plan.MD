@@ -34,10 +34,11 @@ Each step must be validated using the local dev environment before moving on. Th
 Secrets and config are in `.env` (gitignored). Both files (`docker-compose.yml` and `.env`) already exist in the project root.
 
 **Validation loop for each step:**
-1. `docker compose up -d` (start/restart services)
+1. `docker compose build && docker compose up -d` (rebuild and start/restart services)
 2. Check container logs: `docker compose logs endurain --tail 50` (no startup errors)
 3. Run step-specific checks (e.g., verify table exists, test API endpoints via `curl`, confirm frontend builds)
-4. Fix any issues before proceeding to the next step
+4. For steps with UI changes: open browser at `http://localhost:8080`, log in, and visually verify the feature works (navigate, click, submit forms, check responses)
+5. If any check fails, fix the issue and repeat from step 1. Iterate until all checks pass before proceeding to the next step
 
 ## Dependency Graph
 
@@ -253,7 +254,7 @@ cd frontend/app && npm run build
 
 ---
 
-### Step 3: API Key Validation Utility
+### Step 3: API Key Validation Utility ✅ DONE
 
 **Goal:** A utility function to validate raw API keys against the database. Used by the MCP `TokenVerifier` in Phase 2.
 
@@ -293,7 +294,7 @@ cd frontend/app && npm run build
 
 ---
 
-### Step 4: Frontend — API Key Management UI
+### Step 4: Frontend — API Key Management UI ✅ DONE
 
 **Goal:** Add an "API Keys" section to the Settings page where users can create, view, and delete API keys.
 

@@ -73,6 +73,7 @@ const componentPaths = {
   settingsSecurityZone: 'components/settings/settingsSecurityZoneComponent.json',
   settingsIntegrationsZone: 'components/settings/settingsIntegrationsZoneComponent.json',
   settingsImportZone: 'components/settings/settingsImportZoneComponent.json',
+  settingsApiKeysZone: 'components/settings/settingsApiKeysZoneComponent.json',
   garminConnectLoginModalComponent:
     'components/settings/settingsIntegrationsZone/garminConnectLoginModalComponent.json',
   usersAddEditUserModalComponent:
