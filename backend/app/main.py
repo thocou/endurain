@@ -119,13 +119,38 @@ async def startup_event():
                 server_settings_schema.DEFAULT_ALLOWED_TILE_DOMAINS.copy()
             )
 
+    # Start MCP session manager
+    if core_config.MCP_ENABLED:
+        from mcp_module.server import (
+            mcp_server as endurain_mcp_server,
+        )
 
-def shutdown_event():
+        app.state.mcp_session_cm = (
+            endurain_mcp_server.session_manager.run()
+        )
+        await app.state.mcp_session_cm.__aenter__()
+        core_logger.print_to_log_and_console(
+            "MCP server started"
+        )
+
+
+async def shutdown_event():
     # Log the shutdown event
     core_logger.print_to_log_and_console("Backend shutdown event")
 
     # Shutdown the scheduler when the application is shutting down
     core_scheduler.stop_scheduler()
+
+    # Stop MCP session manager
+    if core_config.MCP_ENABLED and hasattr(
+        app.state, "mcp_session_cm"
+    ):
+        await app.state.mcp_session_cm.__aexit__(
+            None, None, None
+        )
+        core_logger.print_to_log_and_console(
+            "MCP server stopped"
+        )
 
 
 def create_app() -> FastAPI:
@@ -205,6 +230,17 @@ def create_app() -> FastAPI:
         StaticFiles(directory=core_config.ACTIVITY_MEDIA_DIR),
         name="activity_media",
     )
+
+    # Mount MCP server if enabled
+    if core_config.MCP_ENABLED:
+        from mcp_module.server import (
+            mcp_server as endurain_mcp_server,
+        )
+
+        fastapi_app.mount(
+            "/mcp",
+            endurain_mcp_server.streamable_http_app(),
+        )
 
     return fastapi_app
 

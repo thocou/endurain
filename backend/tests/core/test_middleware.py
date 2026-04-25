@@ -60,6 +60,11 @@ def app_with_csrf():
     async def test_public():
         return {"message": "Public success"}
 
+    # MCP endpoint for testing
+    @app.post("/mcp/")
+    async def test_mcp():
+        return {"message": "MCP success"}
+
     return app
 
 
@@ -268,6 +273,21 @@ class TestCSRFMiddlewareExemptPaths:
         )
         assert response.status_code == 200
         assert response.json() == {"message": "Public success"}
+
+    def test_mcp_route_exempt(self, client):
+        """
+        Test that /mcp routes are exempt from CSRF checks.
+
+        Verifies:
+            - MCP endpoint is exempt from CSRF protection
+            - MCP clients don't send X-CSRF-Token headers
+        """
+        response = client.post(
+            "/mcp/",
+            headers={"X-Client-Type": "web"}
+        )
+        assert response.status_code == 200
+        assert response.json() == {"message": "MCP success"}
 
 
 class TestCSRFMiddlewareInMemoryModel:

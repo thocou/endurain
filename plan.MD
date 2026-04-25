@@ -632,6 +632,32 @@ curl -s http://localhost:8000/mcp
 cd ../../frontend/app && npm run build
 ```
 
+#### 6g. Tests for Step 6
+
+**Goal:** Cover MCP module with unit tests. Follow existing patterns in `backend/tests/`.
+
+**New files:**
+- `backend/tests/mcp_module/__init__.py` — empty
+- `backend/tests/mcp_module/test_auth.py` — tests for `EndurainTokenVerifier`
+- `backend/tests/mcp_module/test_utils.py` — tests for `get_user_id` and `get_db`
+
+**Modify:**
+- `backend/tests/core/test_middleware.py` — add test for `/mcp` CSRF exemption
+
+**Test coverage:**
+
+| Test file | What it covers |
+|-----------|---------------|
+| `test_auth.py` | `verify_token()` with valid key, invalid key, expired key, DB error |
+| `test_utils.py` | `get_user_id()` extracts client_id correctly, `get_db()` returns a session |
+| `test_middleware.py` | `/mcp` prefix is CSRF-exempt for web clients |
+
+**Validation:**
+
+```bash
+cd backend && poetry run pytest tests/mcp_module/ tests/core/test_middleware.py -v
+```
+
 ---
 
 ### Step 7: MCP Tools — Activities

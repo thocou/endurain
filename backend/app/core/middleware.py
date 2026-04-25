@@ -140,6 +140,7 @@ class CSRFMiddleware(BaseHTTPMiddleware):
         # Define path prefixes that don't need CSRF protection (for dynamic routes)
         self.exempt_path_prefixes = [
             "/api/v1/public/idp/session/",
+            "/mcp",
         ]
 
     async def dispatch(self, request: Request, call_next):

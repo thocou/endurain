@@ -46,6 +46,11 @@ NOMINATIM_API_HOST = os.getenv(
 ).lower()
 NOMINATIM_API_USE_HTTPS = os.getenv("NOMINATIM_API_USE_HTTPS", "true").lower() == "true"
 GEOCODES_MAPS_API = os.getenv("GEOCODES_MAPS_API", "changeme")
+
+# MCP (Model Context Protocol) server
+MCP_ENABLED = (
+    os.getenv("MCP_ENABLED", "true").lower() == "true"
+)
 try:
     REVERSE_GEO_RATE_LIMIT = float(os.getenv("REVERSE_GEO_RATE_LIMIT", "1"))
 except ValueError:
