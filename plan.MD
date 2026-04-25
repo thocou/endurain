@@ -660,7 +660,7 @@ cd backend && poetry run pytest tests/mcp_module/ tests/core/test_middleware.py 
 
 ---
 
-### Step 7: MCP Tools — Activities
+### Step 7: MCP Tools — Activities ✅ DONE
 
 **Goal:** Implement activity-related MCP tools.
 
@@ -746,6 +746,36 @@ curl -s -X POST http://localhost:8000/mcp \
 cd ../../frontend/app && npm run build
 ```
 
+#### 7g. Tests for Step 7
+
+**Goal:** Cover all activity tools with unit tests.
+
+**New files:**
+- `backend/tests/mcp_module/tools/__init__.py` — empty
+- `backend/tests/mcp_module/tools/test_activities.py`
+
+**Test coverage:**
+
+| Test | What it covers |
+|------|---------------|
+| `test_list_activities_returns_results` | `list_activities` calls CRUD with correct user_id and filters, returns serialized list |
+| `test_list_activities_empty` | Returns empty list when no activities exist |
+| `test_list_activities_with_filters` | Passes start_date, end_date, activity_type to CRUD |
+| `test_get_activity_returns_data` | `get_activity` returns a single activity by ID for the user |
+| `test_get_activity_not_found` | Returns appropriate error/None for non-existent activity |
+| `test_get_activity_laps_returns_data` | `get_activity_laps` returns lap data for the user's activity |
+| `test_get_activity_streams_returns_data` | `get_activity_streams` returns stream data for the user's activity |
+| `test_delete_activity_success` | `delete_activity` calls CRUD delete with correct user_id and activity_id |
+| `test_delete_activity_not_found` | Returns error for non-existent activity |
+| `test_user_isolation` | Each tool only accesses data for the authenticated user_id |
+| `test_db_session_closed` | DB session is always closed, even on exceptions |
+
+**Validation:**
+
+```bash
+cd backend && poetry run pytest tests/mcp_module/tools/test_activities.py -v
+```
+
 ---
 
 ### Step 8: MCP Tools — Health
@@ -798,6 +828,32 @@ curl -s -X POST http://localhost:8000/mcp \
 cd ../../frontend/app && npm run build
 ```
 
+#### 8g. Tests for Step 8
+
+**Goal:** Cover all health tools with unit tests.
+
+**New file:**
+- `backend/tests/mcp_module/tools/test_health.py`
+
+**Test coverage:**
+
+| Test | What it covers |
+|------|---------------|
+| `test_get_weight_data_returns_results` | `get_weight_data` calls CRUD with correct user_id and date range |
+| `test_get_weight_data_empty` | Returns empty list when no weight data exists |
+| `test_get_steps_data_returns_results` | `get_steps_data` returns step records |
+| `test_get_sleep_data_returns_results` | `get_sleep_data` returns sleep records |
+| `test_log_weight_success` | `log_weight` creates a weight entry via CRUD |
+| `test_log_steps_success` | `log_steps` creates a steps entry via CRUD |
+| `test_user_isolation` | Health tools only access data for the authenticated user_id |
+| `test_db_session_closed` | DB session is always closed, even on exceptions |
+
+**Validation:**
+
+```bash
+cd backend && poetry run pytest tests/mcp_module/tools/test_health.py -v
+```
+
 ---
 
 ### Step 9: MCP Tools — Gear
@@ -845,6 +901,34 @@ cd backend/app && uvicorn main:app --reload
 cd ../../frontend/app && npm run build
 ```
 
+#### 9g. Tests for Step 9
+
+**Goal:** Cover all gear tools with unit tests.
+
+**New file:**
+- `backend/tests/mcp_module/tools/test_gear.py`
+
+**Test coverage:**
+
+| Test | What it covers |
+|------|---------------|
+| `test_list_gear_returns_results` | `list_gear` calls CRUD with correct user_id |
+| `test_list_gear_with_type_filter` | Passes gear_type filter to CRUD |
+| `test_list_gear_empty` | Returns empty list when no gear exists |
+| `test_get_gear_returns_data` | `get_gear` returns a single gear item |
+| `test_get_gear_not_found` | Returns appropriate error/None for non-existent gear |
+| `test_create_gear_success` | `create_gear` creates gear via CRUD with all fields |
+| `test_delete_gear_success` | `delete_gear` deletes gear via CRUD |
+| `test_delete_gear_not_found` | Returns error for non-existent gear |
+| `test_user_isolation` | Gear tools only access data for the authenticated user_id |
+| `test_db_session_closed` | DB session is always closed, even on exceptions |
+
+**Validation:**
+
+```bash
+cd backend && poetry run pytest tests/mcp_module/tools/test_gear.py -v
+```
+
 ---
 
 ### Step 10: MCP Tools — Profile
@@ -882,6 +966,29 @@ cd backend/app && uvicorn main:app --reload
 
 # 5. Frontend still builds
 cd ../../frontend/app && npm run build
+```
+
+#### 10g. Tests for Step 10
+
+**Goal:** Cover all profile tools with unit tests.
+
+**New file:**
+- `backend/tests/mcp_module/tools/test_profile.py`
+
+**Test coverage:**
+
+| Test | What it covers |
+|------|---------------|
+| `test_get_profile_returns_data` | `get_profile` returns the authenticated user's profile |
+| `test_get_profile_user_isolation` | Only returns profile for the authenticated user_id |
+| `test_get_goals_returns_data` | `get_goals` returns the user's training goals |
+| `test_get_goals_empty` | Returns empty/default when no goals set |
+| `test_db_session_closed` | DB session is always closed, even on exceptions |
+
+**Validation:**
+
+```bash
+cd backend && poetry run pytest tests/mcp_module/tools/test_profile.py -v
 ```
 
 ---
@@ -929,6 +1036,31 @@ curl -s -X POST http://localhost:8000/mcp \
 cd ../../frontend/app && npm run build
 ```
 
+#### 11g. Tests for Step 11
+
+**Goal:** Cover all MCP resources with unit tests.
+
+**New file:**
+- `backend/tests/mcp_module/test_resources.py`
+
+**Test coverage:**
+
+| Test | What it covers |
+|------|---------------|
+| `test_recent_activities_resource` | `activities://recent` returns last 20 activities as JSON summary |
+| `test_recent_activities_empty` | Returns empty list when user has no activities |
+| `test_health_summary_resource` | `health://summary` returns last 30 days of weight, steps, sleep |
+| `test_health_summary_empty` | Returns empty/default when no health data exists |
+| `test_profile_me_resource` | `profile://me` returns authenticated user's profile |
+| `test_user_isolation` | Each resource only returns data for the authenticated user_id |
+| `test_db_session_closed` | DB session is always closed, even on exceptions |
+
+**Validation:**
+
+```bash
+cd backend && poetry run pytest tests/mcp_module/test_resources.py -v
+```
+
 ---
 
 ### Step 12: MCP Prompts
@@ -970,6 +1102,29 @@ curl -s -X POST http://localhost:8000/mcp \
 
 # 4. Frontend still builds
 cd ../../frontend/app && npm run build
+```
+
+#### 12g. Tests for Step 12
+
+**Goal:** Cover all MCP prompts with unit tests.
+
+**New file:**
+- `backend/tests/mcp_module/test_prompts.py`
+
+**Test coverage:**
+
+| Test | What it covers |
+|------|---------------|
+| `test_analyze_training_prompt` | `analyze_training` returns structured messages with correct period argument |
+| `test_analyze_training_default_period` | Uses `last_30_days` when no period specified |
+| `test_weekly_summary_prompt` | `weekly_summary` returns structured weekly recap messages |
+| `test_gear_check_prompt` | `gear_check` returns structured gear assessment messages |
+| `test_prompts_registered` | All 3 prompts are registered on the MCP server |
+
+**Validation:**
+
+```bash
+cd backend && poetry run pytest tests/mcp_module/test_prompts.py -v
 ```
 
 ---
@@ -1073,7 +1228,7 @@ mkdocs serve
 
 ## Files Summary
 
-### New files to create (22 files)
+### New files to create (29 files)
 
 | File | Phase | Step |
 |------|-------|------|
@@ -1089,17 +1244,27 @@ mkdocs serve
 | `backend/app/mcp_module/server.py` | 2 | 6 |
 | `backend/app/mcp_module/auth.py` | 2 | 6 |
 | `backend/app/mcp_module/utils.py` | 2 | 6 |
+| `backend/tests/mcp_module/__init__.py` | 2 | 6g |
+| `backend/tests/mcp_module/test_auth.py` | 2 | 6g |
+| `backend/tests/mcp_module/test_utils.py` | 2 | 6g |
 | `backend/app/mcp_module/tools/__init__.py` | 2 | 7 |
 | `backend/app/mcp_module/tools/activities.py` | 2 | 7 |
+| `backend/tests/mcp_module/tools/__init__.py` | 2 | 7g |
+| `backend/tests/mcp_module/tools/test_activities.py` | 2 | 7g |
 | `backend/app/mcp_module/tools/health.py` | 2 | 8 |
+| `backend/tests/mcp_module/tools/test_health.py` | 2 | 8g |
 | `backend/app/mcp_module/tools/gear.py` | 2 | 9 |
+| `backend/tests/mcp_module/tools/test_gear.py` | 2 | 9g |
 | `backend/app/mcp_module/tools/profile.py` | 2 | 10 |
+| `backend/tests/mcp_module/tools/test_profile.py` | 2 | 10g |
 | `backend/app/mcp_module/resources.py` | 2 | 11 |
+| `backend/tests/mcp_module/test_resources.py` | 2 | 11g |
 | `backend/app/mcp_module/prompts.py` | 2 | 12 |
+| `backend/tests/mcp_module/test_prompts.py` | 2 | 12g |
 | `backend/app/alembic/versions/<auto>.py` | 1 | 1 |
 | `docs/integrations/mcp.md` | 4 | 14 |
 
-### Existing files to modify (7 files)
+### Existing files to modify (8 files)
 
 | File | Change | Step |
 |------|--------|------|
@@ -1108,5 +1273,6 @@ mkdocs serve
 | `backend/app/core/middleware.py` | Add `/mcp` to CSRF `exempt_path_prefixes` | 6 |
 | `backend/app/core/routes.py` | Register `api_keys` router | 2 |
 | `backend/app/main.py` | Mount MCP app + session manager lifecycle | 6 |
+| `backend/tests/core/test_middleware.py` | Add `/mcp` CSRF exemption test | 6g |
 | `frontend/app/src/components/Settings/SettingsSideBarComponent.vue` | Add "API Keys" nav item | 4 |
 | `frontend/app/src/views/SettingsView.vue` | Add `SettingsApiKeysZone` rendering | 4 |

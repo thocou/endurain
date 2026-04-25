@@ -21,4 +21,5 @@ mcp_server = FastMCP(
     ),
 )
 
-# Tool/resource/prompt imports will be added in Steps 7-12
+# Tool/resource/prompt imports — registers decorators
+import mcp_module.tools.activities  # noqa: F401
