@@ -2,7 +2,7 @@
 
 from datetime import datetime
 
-from pydantic import BaseModel, Field
+from pydantic import BaseModel, ConfigDict, Field
 
 
 class ApiKeyCreate(BaseModel):
@@ -36,7 +36,7 @@ class ApiKeyResponse(BaseModel):
     last_used_at: datetime | None
     expires_at: datetime | None
 
-    model_config = {"from_attributes": True}
+    model_config = ConfigDict(from_attributes=True)
 
 
 class ApiKeyCreated(ApiKeyResponse):
