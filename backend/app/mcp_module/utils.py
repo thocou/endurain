@@ -1,6 +1,9 @@
 """Utility functions for MCP tool implementations."""
 
 from mcp.server.fastmcp import Context
+from mcp.server.auth.middleware.auth_context import (
+    get_access_token,
+)
 
 from core.database import SessionLocal
 
@@ -15,9 +18,10 @@ def get_user_id(ctx: Context) -> int:
     Returns:
         The authenticated user's ID.
     """
-    return int(
-        ctx.request_context.access_token.client_id
-    )
+    token = get_access_token()
+    if token is None:
+        raise ValueError("No access token found")
+    return int(token.client_id)
 
 
 def get_db():
